@@ -11,22 +11,22 @@ function App() {
     const [value, handleChange] = UseForms({name: "", price: "", quantity: ""})
 
 
-    useEffect(() => {
+    useEffect(() => {                                                                       //READ
         getDocs(collectionRef).then((response) => {
             setProducts(response.docs.map((obj) => ({...obj.data(), id: obj.id})))
         })
     }, [])
 
-    const addDocs = async () => {
+    const addDocs = async () => {                                                           //CREATE
         await addDoc(collectionRef, {name: value.name, price: value.price, quantity: Number(value.quantity)})
     }
 
-    const Updatedoc = async (id, quantity) => {
+    const Updatedoc = async (id, quantity) => {                                             //UPDATE
         const userdoc = doc(db, "products", id)
         await updateDoc(userdoc, {quantity: quantity + 1})
     }
 
-    const deleteUser=async (id)=>{
+    const deleteUser=async (id)=>{                                                          //DELETE
         const userdoc = doc(db, "products", id)
         await deleteDoc(userdoc)
     }
