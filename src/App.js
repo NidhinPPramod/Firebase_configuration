@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import UseForms from "./components/useForms";
 import Auth from "./Firebase Auth/Auth";
 import GoogleAuth from "./Firebase Auth/GoogleAuth";
+import FireStorage from "./FirebaseStorage/FireStorage";
 
 function App() {
 
@@ -69,6 +70,11 @@ function App() {
                 <h1>Google Authentication</h1>
                 <GoogleAuth/>
             </div>
+            <div className="d-flex flex-column justify-content-center align-items-center p-3 mt-2">
+                <h1>File Upload</h1>
+                <FireStorage/>
+            </div>
+
         </div>
     );
 }
