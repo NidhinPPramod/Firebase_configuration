@@ -36,6 +36,7 @@ const Auth = () => {
 
     const logout = async () => {                                            //USER LOGOUT
         await signOut(auth)
+        localStorage.clear()
     }
 
     return (
