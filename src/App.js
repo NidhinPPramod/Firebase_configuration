@@ -1,7 +1,8 @@
 import {db} from "./firebase/config"
-import {collection, getDocs, addDoc, updateDoc, doc,deleteDoc} from 'firebase/firestore';
+import {collection, getDocs, addDoc, updateDoc, doc, deleteDoc} from 'firebase/firestore';
 import {useEffect, useState} from "react";
 import UseForms from "./components/useForms";
+import Auth from "./Firebase Auth/Auth";
 
 function App() {
 
@@ -26,14 +27,14 @@ function App() {
         await updateDoc(userdoc, {quantity: quantity + 1})
     }
 
-    const deleteUser=async (id)=>{                                                          //DELETE
+    const deleteUser = async (id) => {                                                          //DELETE
         const userdoc = doc(db, "products", id)
         await deleteDoc(userdoc)
     }
 
     return (
         <div className="App">
-            <div>
+            <div className="p-3">
                 <h1>Create Products</h1>
                 <input type="text" value={value.name} name="name" placeholder="Enter name" onChange={handleChange}/>
                 <input type="number" value={value.price} name="price" placeholder="Enter price"
@@ -43,7 +44,7 @@ function App() {
                 <button onClick={addDocs}>Submit</button>
             </div>
 
-            <h1>Products</h1>
+            <h1 className="p-3">Products</h1>
             {products.map((value) => {
                 return (
                     <div>
@@ -51,13 +52,18 @@ function App() {
                             name:{value.name}<br/>
                             price:{value.price}<br/>
                             quantity:{value.quantity}<br/>
-                            <button onClick={() => Updatedoc(value.id, value.quantity)}>Increase quantity</button><br/>
-                            <button onClick={()=>deleteUser(value.id)}>Delete Product</button>
+                            <button onClick={() => Updatedoc(value.id, value.quantity)}>Increase quantity</button>
+                            <br/>
+                            <button onClick={() => deleteUser(value.id)}>Delete Product</button>
                         </p>
                     </div>
                 )
             })
             }
+            <div className="d-flex flex-column justify-content-center align-items-center p-3">
+                <h1>Firebase AUTHENTICATION</h1>
+                <Auth/>
+            </div>
         </div>
     );
 }
